@@ -229,6 +229,7 @@ local plugins = {
     },
     {
         -- markdown flow
+        -- "davidgranstrom/nvim-markdown-preview",
         "jakewvincent/mkdnflow.nvim",
         lazy = true,
         ft = { "markdown" },
@@ -386,10 +387,10 @@ local plugins = {
     },
     {
         -- markdown preview
-        "iamcco/markdown-preview.nvim",
+        -- "iamcco/markdown-preview.nvim",
+        "davidgranstrom/nvim-markdown-preview",
         lazy = true,
         ft = "markdown",
-        build = ":call mkdp#util#install()",
         config = require("modules.plugins.tool.markdown-preview")
     },
     {
