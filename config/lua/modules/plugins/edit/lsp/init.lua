@@ -38,7 +38,7 @@ return function()
 			-- 1. The repository (e.g. "rust-lang/rust-analyzer")
 			-- 2. The release version (e.g. "v0.3.0")
 			-- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
-			-- download_url_template = "https://gbproxy.com/https://github.com/%s/releases/download/%s/%s",
+			-- download_url_template = "https://ghproxy.com/https://github.com/%s/releases/download/%s/%s",
 		},
 		pip = {
 			-- Whether to upgrade pip to the latest version in the virtual environment before installing packages.
@@ -57,6 +57,7 @@ return function()
 		ensure_installed = require("settings").lsp_list,
 	})
 
+	-- setup keymaps
 	require("modules.keymaps")["lsp"]()
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -80,6 +81,9 @@ return function()
 	}
 
 	mason_lspconfig.setup_handlers({
+		-- The first entry (without a key) will be the default handler
+		-- and will be called for each installed server that doesn't have
+		-- a dedicated handler.
 		function(server)
 			nvim_lsp[server].setup({
 				capabilities = opts.capabilities,
@@ -118,6 +122,17 @@ return function()
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 			nvim_lsp.html.setup(final_opts)
 		end,
+		-- using nvim-jdtls standalone is better, see https://github.com/mfussenegger/nvim-jdtls#nvim-lspconfig-and-nvim-jdtls-differences
+		jdtls = function()
+			local opts = require("modules.plugins.edit.lsp.servers.jdtls")
+			local ok, jdtls = pcall(require, "jdtls")
+			if not ok then
+				vim.notify("Fail to load nvim-jdtls")
+				return
+			else
+				jdtls.start_or_attach(opts)
+			end
+		end,
 		jsonls = function()
 			local _opts = require("modules.plugins.edit.lsp.servers.jsonls")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
@@ -145,6 +160,6 @@ return function()
 				-- We don't want to call lspconfig.rust_analyzer.setup() when using rust-tools
 				rust_tools.setup(_opts.rust_tool)
 			end
-		end
+		end,
 	})
 end

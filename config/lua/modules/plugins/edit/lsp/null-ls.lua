@@ -12,7 +12,7 @@ return function()
 	})
 
 	mason_null_ls.setup({
-		ensure_installed = require("settings").null_ls,
+		ensure_installed = require("settings")["null_ls_list"],
 		automatic_installation = true,
 		automatic_setup = true,
 	})

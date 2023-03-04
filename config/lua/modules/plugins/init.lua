@@ -264,7 +264,12 @@ local plugins = {
 		},
 	},
 	{
-		-- rust lsp
+		"mfussenegger/nvim-jdtls",
+		lazy = true,
+		ft = "java",
+	},
+	{
+		-- rust lsp integration with rust-analyzer
 		"simrat39/rust-tools.nvim",
 		lazy = true,
 		ft = "rust",
