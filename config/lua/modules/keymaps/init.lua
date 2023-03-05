@@ -380,6 +380,14 @@ plugin_key_mapping["sniprun"] = function()
 		["n|<leader>cr"] = map_cu([[%SnipRun]]):with_noremap():with_silent():with_desc("tool: Run code by file"),
 	})
 end
+plugin_key_mapping["jaq"] = function()
+	bind.nvim_load_mapping({
+		["n|<leader>jcr"] = map_cmd(":silent only | Jaq<cr>")
+			:with_noremap()
+			:with_silent()
+			:with_desc("tool: Run java code by file"),
+	})
+end
 plugin_key_mapping["trouble"] = function()
 	bind.nvim_load_mapping({
 		-- "t" is used by toggle_term, "e" meanings "error"
@@ -519,6 +527,26 @@ plugin_key_mapping["lsp"] = function()
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Show outgoing calls"),
+		["n|<leader>lju"] = map_cmd("<Cmd>JdtUpdateConfig<CR>")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: java: update config"),
+		["n|<leader>ljr"] = map_cmd("<Cmd>JdtWipeDataAndRestart<CR>")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: java: Wipe project data and Restart server"),
+		["n|<leader>lji"] = map_cmd("<Cmd>lua require'jdtls'.organize_imports<CR>")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: java: Organize Imports"),
+		["n|<leader>ljt"] = map_cmd("<Cmd>lua require'jdtls'.test_nearest_method({ config = { console = 'console' }})<CR>")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: java: Test Method (without Maven)"),
+		["n|<leader>ljT"] = map_cmd("<Cmd>lua require'jdtls'.test_class({ config = { console = 'console' }})<CR>")
+			:with_noremap()
+			:with_silent()
+			:with_desc("lsp: java: Test Class (without Maven)"),
 	})
 end
 

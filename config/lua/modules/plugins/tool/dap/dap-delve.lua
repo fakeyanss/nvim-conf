@@ -10,18 +10,18 @@ dap.adapters.go = function(callback)
 		args = { "dap", "-l", "127.0.0.1:" .. port },
 		detached = true,
 	}
-	handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
+	handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code) -- delve bin is named as "dlv"
 		stdout:close()
 		handle:close()
 		if code ~= 0 then
 			vim.notify(
-				string.format('"dlv" exited with code: %d, please check your configs for correctness.', code),
+				string.format('"delve" exited with code: %d, please check your configs for correctness.', code),
 				vim.log.levels.WARN,
 				{ title = "[go] DAP Warning!" }
 			)
 		end
 	end)
-	assert(handle, "Error running dlv: " .. tostring(pid_or_err))
+	assert(handle, "Error running delve: " .. tostring(pid_or_err))
 	stdout:read_start(function(err, chunk)
 		assert(not err, err)
 		if chunk then

@@ -4,6 +4,7 @@ return function()
 
 	local dap = require("dap")
 	local dapui = require("dapui")
+	local mason_dap = require("mason-nvim-dap")
 
 	dap.listeners.after.event_initialized["dapui_config"] = function()
 		dapui.open()
@@ -33,8 +34,15 @@ return function()
 	)
 	vim.fn.sign_define("DapLogPoint", { text = icons.dap.LogPoint, texthl = "DapLogPoint", linehl = "", numhl = "" })
 
+	-- We need to install dap client using mason-nvim-dap.
+	mason_dap.setup({
+		ensure_installed = require("settings")["dap_list"],
+		automatic_installation = true,
+		automatic_setup = true,
+	})
+
 	-- Config lang adaptors
 	require("modules.plugins.tool.dap.dap-lldb")
 	require("modules.plugins.tool.dap.dap-debugpy")
-	require("modules.plugins.tool.dap.dap-dlv")
+	require("modules.plugins.tool.dap.dap-delve")
 end

@@ -410,6 +410,7 @@ local plugins = {
 		ft = "csv",
 	},
 	{
+		-- code runner
 		"michaelb/sniprun",
 		lazy = true,
 		-- You need to cd to `~/.local/share/nvim/lazy/sniprun/` and execute `bash ./install.sh`,
@@ -417,6 +418,13 @@ local plugins = {
 		build = "bash ./install.sh",
 		cmd = { "SnipRun" },
 		config = require("modules.plugins.tool.sniprun"),
+	},
+	{
+		-- code runner for java
+		"is0n/jaq-nvim",
+		lazy = true,
+		cmd = "Jaq",
+		config = require("modules.plugins.tool.jaq"),
 	},
 	{
 		"akinsho/toggleterm.nvim",
@@ -451,6 +459,7 @@ local plugins = {
 				"rcarriga/nvim-dap-ui",
 				config = require("modules.plugins.tool.dap.dapui"),
 			},
+			{ "jay-babu/mason-nvim-dap.nvim" },
 		},
 	},
 	{

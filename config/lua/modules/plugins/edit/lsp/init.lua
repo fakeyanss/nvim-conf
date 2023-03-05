@@ -85,6 +85,10 @@ return function()
 		-- and will be called for each installed server that doesn't have
 		-- a dedicated handler.
 		function(server)
+			-- jdtls is configured in /ftplugin/java.lua
+			if server == "jdtls" then
+				return
+			end
 			nvim_lsp[server].setup({
 				capabilities = opts.capabilities,
 				on_attach = opts.on_attach,
@@ -122,17 +126,17 @@ return function()
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
 			nvim_lsp.html.setup(final_opts)
 		end,
-		-- using nvim-jdtls standalone is better, see https://github.com/mfussenegger/nvim-jdtls#nvim-lspconfig-and-nvim-jdtls-differences
-		jdtls = function()
-			local opts = require("modules.plugins.edit.lsp.servers.jdtls")
-			local ok, jdtls = pcall(require, "jdtls")
-			if not ok then
-				vim.notify("Fail to load nvim-jdtls")
-				return
-			else
-				jdtls.start_or_attach(opts)
-			end
-		end,
+		-- -- using nvim-jdtls standalone is better, see https://github.com/mfussenegger/nvim-jdtls#nvim-lspconfig-and-nvim-jdtls-differences
+		-- jdtls = function()
+		-- 	local opts = require("modules.plugins.edit.lsp.servers.jdtls")
+		-- 	local ok, jdtls = pcall(require, "jdtls")
+		-- 	if not ok then
+		-- 		vim.notify("Fail to load nvim-jdtls")
+		-- 		return
+		-- 	else
+		-- 		jdtls.start_or_attach(opts)
+		-- 	end
+		-- end,
 		jsonls = function()
 			local _opts = require("modules.plugins.edit.lsp.servers.jsonls")
 			local final_opts = vim.tbl_deep_extend("keep", _opts, opts)
