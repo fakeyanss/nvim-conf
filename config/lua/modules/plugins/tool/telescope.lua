@@ -59,6 +59,7 @@ return function()
 				show_scores = true,
 				show_unindexed = true,
 				ignore_patterns = { "*.git/*", "*/tmp/*" },
+				show_filter_column = { "LSP", "CWD", "FOO" },
 			},
 			live_grep_args = {
 				auto_quoting = true, -- enable/disable auto-quoting
