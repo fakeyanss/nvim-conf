@@ -49,8 +49,8 @@ _G.clipboard_config = function()
 	if env.is_mac then
 		vim.g.clipboard = {
 			name = "macOS-clipboard",
-			copy = { ["+"] = "pbcopy",["*"] = "pbcopy" },
-			paste = { ["+"] = "pbpaste",["*"] = "pbpaste" },
+			copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
+			paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
 			cache_enabled = 0,
 		}
 	elseif env.is_wsl then

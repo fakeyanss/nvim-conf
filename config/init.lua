@@ -1,7 +1,9 @@
 require("util")
 
-require('basic')
+require("basic")
 
-require('settings')
+require("settings")
 
-require('modules')
+require("autocmds")
+
+require("modules")
